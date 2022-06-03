@@ -7,7 +7,7 @@ const usersSlice = createSlice({
    },
    reducers: {
       signInUser(state, action) {
-        return [...state, action.payload]
+        return [{...state}, action.payload]
       },
    },
 });
