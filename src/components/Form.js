@@ -29,15 +29,25 @@ const Form = (props) => {
    const { inputs, buttonName, handleSubmit, header } = props;
    const [userData, setUserData] = useState({});
    const [disable, setDisable] = useState(false);
+   const phoneRegEx =
+      /(0|\\+98)?([ ]|-|[()]){0,2}9[0|1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}/gi;
+   const emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
    const changeHandler = (e) => {
+      // if (e.target.name === "phone" && e.target.name.match(phoneRegEx)) {
+      //    setUserData({ ...userData, [e.target.name]: e.target.value });
+      // }
+      // if (e.target.name === "email" && e.target.name.match(emailRegEx)) {
+      //    setUserData({ ...userData, [e.target.name]: e.target.value });
+      // }
       setUserData({ ...userData, [e.target.name]: e.target.value });
+
    };
-   let disabled = false
    return (
       <FormInput
          onSubmit={(e) => {
             e.preventDefault();
             handleSubmit(userData);
+            console.log(userData);
             e.target.reset();
          }}
       >
@@ -51,6 +61,7 @@ const Form = (props) => {
                   name={item.value}
                   value={userData?.item}
                   placeholder={item.value}
+                  required
                />
             );
          })}
@@ -58,9 +69,7 @@ const Form = (props) => {
             to="/dashboard"
             style={{ color: "inherit", textDecoration: "none" }}
          > */}
-         <Button type="submit">
-            {buttonName}
-         </Button>
+         <Button type="submit">{buttonName}</Button>
          {/* </Link> */}
       </FormInput>
    );

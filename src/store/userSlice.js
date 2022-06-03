@@ -1,11 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const initialState = {
+   users: [],
+};
 const usersSlice = createSlice({
    name: "users",
-   initialState:[],
+   initialState,
    reducers: {
       signInUser(state, action) {
-        return [state, { ...action.payload}]
+         console.log(action.payload);
+       console.log(state); 
+       let isUser =  state.users?.find(item => item.userData.email == action.payload.userData.email)
+       console.log(isUser);
+            // if (item.id !== action.payload.id) {
+               return [state, action.payload];
+            
+       
       },
    },
 });
