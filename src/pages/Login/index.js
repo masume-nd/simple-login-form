@@ -8,7 +8,7 @@ const Login = () => {
   //  };
    return (
       <div>
-         <Form inputs={inputs} buttonName={"Login"} />
+         <Form inputs={inputs} buttonName={"LogIn"} />
       </div>
    );
 };
