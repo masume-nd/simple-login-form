@@ -22,37 +22,46 @@ const Button = styled("button")`
    border-radius: 20px;
    border: none;
 `;
+const FormHeader = styled("h1")`
+   color: white;
+`;
 const Form = (props) => {
-   const { inputs, buttonName, handleSubmit } = props;
+   const { inputs, buttonName, handleSubmit, header } = props;
    const [userData, setUserData] = useState({});
-   const handleSubmitting = (e) => {
-      setUserData(e.target.value);
+   const [disable, setDisable] = useState(false);
+   const changeHandler = (e) => {
+      setUserData({ ...userData, [e.target.name]: e.target.value });
    };
-   useEffect(() => {
-      handleSubmit(userData);
-   }, [userData]);
+   let disabled = false
    return (
-      <FormInput onSubmit={handleSubmitting}>
+      <FormInput
+         onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(userData);
+            e.target.reset();
+         }}
+      >
+         <FormHeader>{header}</FormHeader>
          {inputs.map((item) => {
-            switch (item) {
-               case "password":
-                  return (
-                     <MyInput type="password" key={item} placeholder={item} />
-                  );
-               case "phone":
-                  return <MyInput type="phone" key={item} placeholder={item} />;
-               case "email":
-                  return <MyInput type="email" key={item} placeholder={item} />;
-               default:
-                  return <MyInput type="text" key={item} placeholder={item} />;
-            }
+            return (
+               <MyInput
+                  onChange={(e) => changeHandler(e)}
+                  type={item.type}
+                  key={item.value}
+                  name={item.value}
+                  value={userData?.item}
+                  placeholder={item.value}
+               />
+            );
          })}
-         <Link
+         {/* <Link
             to="/dashboard"
             style={{ color: "inherit", textDecoration: "none" }}
-         >
-            <Button type="submit">{buttonName}</Button>
-         </Link>
+         > */}
+         <Button type="submit">
+            {buttonName}
+         </Button>
+         {/* </Link> */}
       </FormInput>
    );
 };

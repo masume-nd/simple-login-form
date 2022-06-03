@@ -5,14 +5,14 @@ import Login from "./pages/Login";
 import Protectedroute from "./pages/WithAuthentication";
 import Signin from "./pages/Signin";
 import WithAuthentication from "./pages/WithAuthentication";
+import Users from "./pages/Users";
 function App() {
    const user = localStorage.getItem("users");
    return (
       <AuthProvider user={user}>
          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/" element={WithAuthentication(<Dashboard />)} />
+            <Route path="/" element={<Users/>} />
+            {/* <Route path="/" element={WithAuthentication(<Dashboard />)} /> */}
          </Routes>
       </AuthProvider>
    );
