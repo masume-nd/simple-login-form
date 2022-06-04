@@ -47,7 +47,6 @@ const Form = (props) => {
          onSubmit={(e) => {
             e.preventDefault();
             handleSubmit(userData);
-            console.log(userData);
             e.target.reset();
          }}
       >

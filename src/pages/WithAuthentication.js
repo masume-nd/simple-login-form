@@ -1,11 +1,10 @@
 import React from "react";
-import { Navigate, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../components/AuthProvider";
-const WithAuthentication = ({ Component, ...props }) => {
-   const  loggedinUser= useAuth();
-   console.log(loggedinUser);
+function WithAuthentication (Component){
+   const { loggedinUser, setLoggedinUser } = useAuth();
    return function Authentication() {
-      loggedinUser ? <Component></Component> : <Navigate to="/login" replace={true} />;
+      return loggedinUser ? <Component /> : <Navigate to="/" replace={true} />;
    };
 };
 

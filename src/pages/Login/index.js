@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Navigate } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
 import Form from "../../components/Form";
 import { useSelector } from "react-redux";
@@ -11,13 +10,22 @@ const Login = () => {
       { value: "email", type: "emaild" },
       { value: "password", type: "text" },
    ];
-   const users = useSelector(state => state.users.users);
-   const{ loggedinUser, setLoggedinUser } = useAuth()
+   const Navigate = useNavigate();
+   const users = useSelector((state) => state.users.users);
+   const { loggedinUser, setLoggedinUser } = useAuth();
+   console.log(setLoggedinUser);
    const handleSubmit = (userData) => {
-      users.map(user => {
-         user.userData.email == userData.email? setLoggedinUser(user): Toastmessage()
-      })
-    
+      let isUser = users.filter(
+         (user) =>
+            user.userData.email === userData.email &&
+            user.userData.password == userData.password
+      );
+      if (isUser.length > 0) {
+         setLoggedinUser(isUser);
+         Navigate("/dashboard", { replace: true });
+      } else {
+         Toastmessage("(:لطفا ابتدا ثبت نام کنید ");
+      }
    };
    return (
       <div>

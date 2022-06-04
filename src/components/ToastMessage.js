@@ -1,8 +1,8 @@
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
-const Toastmessage = () => {
+const Toastmessage = (message) => {
    return Toastify({
-      text: "لطفا ابتدا ثبت نام کنید!",
+      text: message,
       duration: 3000,
       destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
@@ -11,7 +11,7 @@ const Toastmessage = () => {
       position: "right", // `left`, `center` or `right`
       stopOnFocus: true, // Prevents dismissing of toast on hover
       style: {
-         background: "linear-gradient(to right, #00b09b, #96c93d)",
+         background: "linear-gradient(to right, #654ea3, #eaafc8)",
       },
       onClick: function () {}, // Callback after click
    }).showToast();
