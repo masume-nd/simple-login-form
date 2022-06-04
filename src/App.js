@@ -6,14 +6,14 @@ import Protectedroute from "./pages/WithAuthentication";
 import Signin from "./pages/Signin";
 import WithAuthentication from "./pages/WithAuthentication";
 import Users from "./pages/Users";
+import { useSelector } from "react-redux";
 function App() {
-   const user = localStorage.getItem("users");
+   
    return (
-      <AuthProvider user={user}>
+      <AuthProvider>
          <Routes>
             <Route path="/" element={<Users/>} />
-            {/* <Route path="/" element={WithAuthentication(<Dashboard />)} /> */}
-        
+            <Route path="/" element={WithAuthentication(<Dashboard />)} />
          </Routes>
       </AuthProvider>
    );

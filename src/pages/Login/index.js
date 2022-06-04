@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../components/AuthProvider";
 import Form from "../../components/Form";
-import { signInUser } from "../../store/userSlice";
+import { useSelector } from "react-redux";
+import Toastmessage from "../../components/ToastMessage";
 
 const Login = () => {
    const inputs = [
-      { value: "username", type: "text" },
+      { value: "email", type: "emaild" },
       { value: "password", type: "text" },
    ];
-   const dispatch = useDispatch();
+   const users = useSelector(state => state.users.users);
+   const{ loggedinUser, setLoggedinUser } = useAuth()
    const handleSubmit = (userData) => {
-      dispatch(signInUser(userData));
+      users.map(user => {
+         user.userData.email == userData.email? setLoggedinUser(user): Toastmessage()
+      })
+    
    };
    return (
       <div>
