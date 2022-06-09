@@ -17,8 +17,9 @@ const Dashboard = () => {
    };
    return (
       <div>
-        dsfasdfa
-         <h1>{`hello ${loggedinUser[0]?.userData?.firstname}`}</h1>
+         <h2>{`hello ${loggedinUser[0]?.userData?.firstname+" "+loggedinUser[0]?.userData?.lastname}`}</h2>
+         <h2>{loggedinUser[0]?.userData?.email}</h2>
+         <h2>{loggedinUser[0]?.userData?.phone}</h2>
          <Button onClick={handleClick}>LogOut</Button>
       </div>
    );

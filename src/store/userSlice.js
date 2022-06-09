@@ -6,7 +6,6 @@ const usersSlice = createSlice({
    reducers: {
       signInUser(state, action) {
          Toastmessage("(:ثبت نام با موفقیت انجام شد ")
-
          return { ...state, users: [...state.users, action.payload] };
       },
    },

@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
 import Form from "../../components/Form";
 import { useSelector } from "react-redux";
-import Toastmessage from "../../components/ToastMessage";
-
+import { useDispatch } from "react-redux";
+import Signin from "../Signin";
 const Login = () => {
+   const [signUp, setSignUp] = useState(false);
+   const [emailPass, setEmailPass] = useState([]);
    const inputs = [
       { value: "email", type: "emaild" },
       { value: "password", type: "text" },
    ];
    const Navigate = useNavigate();
+   const dispatch = useDispatch();
    const users = useSelector((state) => state.users.users);
    const { loggedinUser, setLoggedinUser } = useAuth();
-   console.log(setLoggedinUser);
    const handleSubmit = (userData) => {
       let isUser = users.filter(
          (user) =>
@@ -24,17 +26,22 @@ const Login = () => {
          setLoggedinUser(isUser);
          Navigate("/dashboard", { replace: true });
       } else {
-         Toastmessage("(:لطفا ابتدا ثبت نام کنید ");
+         setEmailPass(userData)
+         setSignUp(true);
       }
    };
    return (
       <div>
-         <Form
-            inputs={inputs}
-            buttonName={"LogIn"}
-            handleSubmit={handleSubmit}
-            header={"LOGIN"}
-         />
+         {signUp ? (
+            <Signin data={emailPass}/>
+         ) : (
+            <Form
+               inputs={inputs}
+               buttonName={"LogIn"}
+               handleSubmit={handleSubmit}
+               header={"LOGIN"}
+            />
+         )}
       </div>
    );
 };
