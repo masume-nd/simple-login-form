@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../components/AuthProvider";
-function WithAuthentication (Component){
+function WithAuthentication(Component) {
    const { loggedinUser, setLoggedinUser } = useAuth();
+   console.log(loggedinUser);
+  
    return function Authentication() {
-      return loggedinUser ? <Component /> : <Navigate to="/" replace={true} />;
+      return savedId ? <Component /> : <Navigate to="/" replace={true} />;
    };
-};
+}
 
 export default WithAuthentication;

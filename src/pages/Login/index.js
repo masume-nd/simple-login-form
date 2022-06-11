@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/AuthProvider";
 import Form from "../../components/Form";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import Signin from "../Signin";
 const Login = () => {
@@ -13,7 +14,6 @@ const Login = () => {
       { value: "password", type: "text" },
    ];
    const Navigate = useNavigate();
-   const dispatch = useDispatch();
    const users = useSelector((state) => state.users.users);
    const { loggedinUser, setLoggedinUser } = useAuth();
    const handleSubmit = (userData) => {
@@ -23,10 +23,10 @@ const Login = () => {
             user.userData.password == userData.password
       );
       if (isUser.length > 0) {
-         setLoggedinUser(isUser);
+         setLoggedinUser(isUser[0].id);
          Navigate("/dashboard", { replace: true });
       } else {
-         setEmailPass(userData)
+         setEmailPass({userData, id: uuidv4()})
          setSignUp(true);
       }
    };
